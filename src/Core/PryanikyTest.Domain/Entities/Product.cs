@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace PryanikyTest.Domain.Enteties;
+namespace PryanikyTest.Domain.Entities;
 
 public class Product
 {

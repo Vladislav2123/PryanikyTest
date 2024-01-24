@@ -1,4 +1,4 @@
-﻿using PryanikyTest.Domain.Enteties;
+﻿using PryanikyTest.Domain.Entities;
 
 namespace PryanikyTest.Domain;
 

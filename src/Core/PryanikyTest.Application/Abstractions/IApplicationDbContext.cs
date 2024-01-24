@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using PryanikyTest.Domain;
-using PryanikyTest.Domain.Enteties;
+using PryanikyTest.Domain.Entities;
 
 namespace PryanikyTest.Application.Abstractions;
 

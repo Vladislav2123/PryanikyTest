@@ -2,7 +2,7 @@
 using PryanikyTest.Application.Abstractions;
 using PryanikyTest.DAL.Configurations;
 using PryanikyTest.Domain;
-using PryanikyTest.Domain.Enteties;
+using PryanikyTest.Domain.Entities;
 
 namespace PryanikyTest.DAL;
 

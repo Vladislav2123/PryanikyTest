@@ -1,4 +1,4 @@
-﻿namespace PryanikyTest.Domain.Enteties;
+﻿namespace PryanikyTest.Domain.Entities;
 
 public class AppUser
 {

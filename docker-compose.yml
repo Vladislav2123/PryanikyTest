@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  api:
+    build: .
+    container_name: pryaniky_test_api
+    ports:
+      - 5000:5000
+      - 5001:5001
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:5001;http://+:5000
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: PryanikyTest
+      DB_PASSWORD: StrongPassword           # You can set another password here
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets
+      - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
+    networks:
+      - pryaniky_net
+    restart: always
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres
+    container_name: pryaniky_test_postgres
+    environment:
+      POSTGRES_PASSWORD: StrongPassword     # You can set another password here
+    ports:
+      - 5432:5432
+    networks:
+      - pryaniky_test_net
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      start_period: 10s
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+networks:
+  pryaniky_test_net:
+    name: pryaniky_net

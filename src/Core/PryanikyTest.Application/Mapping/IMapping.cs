@@ -1,6 +1,6 @@
 ﻿﻿using AutoMapper;
 
-namespace LibraryApp.Application.Mapping;
+namespace PryanikyTest.Application.Mapping;
 
 internal interface IMappping
 {

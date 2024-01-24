@@ -1,14 +1,15 @@
 ﻿﻿using AutoMapper;
 using System.Reflection;
 
-namespace LibraryApp.Application.Mapping;
+namespace PryanikyTest.Application.Mapping;
 /// <summary>
-/// Register mappings in assembly.
+/// Register mappings from assembly.
 /// </summary>
 public class AssemblyMappingProfile : Profile
 {
     public AssemblyMappingProfile(Assembly assembly)
     {
+        // Getting mapping types from assembly
         var types = assembly.GetExportedTypes()
             .Where(type => type.GetInterfaces()
             .Any(type => type.IsInterface && type == typeof(IMappping)))

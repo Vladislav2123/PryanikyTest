@@ -8,7 +8,7 @@ namespace PryanikyTest.Application;
 
 public static class DependencyInjection
 {
-    public static void AddApplication(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         // Adding AutoMapper Assyembly Mapping Profile
         services.AddAutoMapper(cfg =>
@@ -19,5 +19,7 @@ public static class DependencyInjection
         
         // Adding Validation Behavior, for handling all validators from assembly
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+        return services;
     }
 }

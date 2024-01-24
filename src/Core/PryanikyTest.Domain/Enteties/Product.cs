@@ -9,5 +9,8 @@ public class Product
     public string? Description { get; set; }
     public DateTime CreationDate { get; set; }
 
+    public Guid SellerId {get; set;}
+    public Seller Seller { get; set; }
+
     public Collection<ProductOrder> ProductOrders { get; set; }
 }

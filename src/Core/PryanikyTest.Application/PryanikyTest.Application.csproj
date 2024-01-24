@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PryanikyTest.Domain\PryanikyTest.Domain.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\PryanikyTest.DAL\PryanikyTest.DAL.csproj" />
   </ItemGroup>
 
   <ItemGroup>

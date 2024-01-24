@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\PryanikyTest.Application\PryanikyTest.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\PryanikyTest.DAL\PryanikyTest.DAL.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\PryanikyTest.Domain\PryanikyTest.Domain.csproj" />
+    <ProjectReference Include="..\..\Core\PryanikyTest.Application\PryanikyTest.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -10,10 +17,8 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.11" />
   </ItemGroup>
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
 
 </Project>

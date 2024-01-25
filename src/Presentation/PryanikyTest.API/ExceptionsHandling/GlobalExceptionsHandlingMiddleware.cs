@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using PryanikyTest.Domain.Exceptions;
 using ValidationException = PryanikyTest.Domain.Exceptions.ValidationException;
 
 namespace PryanikyTest.API.ExceptionsHandling;
@@ -37,6 +38,10 @@ public class GlobalExceptionsHandlingMiddleware : IMiddleware
 
     private int GetStatusCode(Exception exception) => exception switch
     {
+        
+        EntityAlreadyExistException => StatusCodes.Status400BadRequest,
+        EmailAlreadyInUseException => StatusCodes.Status400BadRequest,
+        EntityNotFoundException => StatusCodes.Status404NotFound,
         ValidationException => StatusCodes.Status400BadRequest,
         _ => StatusCodes.Status500InternalServerError
     };

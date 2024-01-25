@@ -1,18 +1,19 @@
-using MediatR;
+using PryanikyTest.Application.Abstractions;
 using PryanikyTest.API.ExceptionsHandling;
 using PryanikyTest.Application;
-using PryanikyTest.Application.Abstractions;
 using PryanikyTest.DAL;
+using MediatR;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllers();
+
 builder.Services
+    .AddEndpointsApiExplorer()
+    .AddSwaggerGen()
+    .AddTransient<GlobalExceptionsHandlingMiddleware>()
     .AddApplication()
     .AddDal(builder.Configuration);
-
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 

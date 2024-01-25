@@ -21,6 +21,11 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .HasMaxLength(300);
 
         builder
+            .Property(product => product.Price)
+            .IsRequired()
+            .HasDefaultValue(0);
+
+        builder
             .Property(product => product.CreationDate)
             .IsRequired();
 
@@ -28,5 +33,10 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             .HasOne(product => product.Seller)
             .WithMany(seller => seller.Products)
             .HasForeignKey(product => product.SellerId);
+        
+        builder
+            .Property(product => product.TotalOrders)
+            .IsRequired()
+            .HasDefaultValue(0);
     }
 }

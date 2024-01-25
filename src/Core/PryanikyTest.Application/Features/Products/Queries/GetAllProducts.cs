@@ -11,7 +11,7 @@ namespace PryanikyTest.Application.Features.Products.Queries;
 
 public record GetAllProductsQuery(
     string? SearchTerms,
-    Guid SellerId,
+    Guid? SellerId,
     string? SortColumn,
     string? SortOrder,
     Page Page

@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PryanikyTest.Application.Abstractions;
 using PryanikyTest.DAL.Configurations;
-using PryanikyTest.Domain;
 using PryanikyTest.Domain.Entities;
 
 namespace PryanikyTest.DAL;

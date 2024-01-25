@@ -1,7 +1,7 @@
 ﻿using PryanikyTest.Application.Abstractions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
-using PryanikyTest.Domain;
+using PryanikyTest.Domain.Entities;
 using MediatR;
 
 namespace PryanikyTest.DAL;

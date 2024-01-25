@@ -1,6 +1,4 @@
-﻿using PryanikyTest.Domain.Entities;
-
-namespace PryanikyTest.Domain;
+﻿namespace PryanikyTest.Domain.Entities;
 
 public class ProductOrder
 {

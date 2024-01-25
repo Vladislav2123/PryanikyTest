@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PryanikyTest.Domain;
+using PryanikyTest.Domain.Entities;
 
 namespace PryanikyTest.DAL;
 

@@ -28,18 +28,19 @@ public class GetOrderByCustomerIdHandler : IRequestHandler<GetOrdersByCustomerId
     public async Task<PagedList<OrderLookupDto>> Handle(GetOrdersByCustomerIdQuery request, CancellationToken cancellationToken)
     {
         // Getting customer
-        var customer = await _dbContext.Customers
-            .Include(customer => customer.Orders)
-            .FirstOrDefaultAsync(customer => customer.Id == request.CustomerId, cancellationToken);
 
-        if(customer == null) throw new EntityNotFoundException(nameof(Customer), request.CustomerId);
+        if(await _dbContext.Customers
+            .AnyAsync(customer => customer.Id == request.CustomerId, cancellationToken) == false)
+                throw new EntityNotFoundException(nameof(Customer), request.CustomerId);
 
         // Sorting orders
-        IQueryable<Order> customerOrders = customer.Orders.AsQueryable();
+        IQueryable<Order> customerOrders = _dbContext.Orders
+            .Include(order => order.ProductOrders)
+            .Where(order => order.CustomerId == request.CustomerId);
         customerOrders = customerOrders.OrderByDescending(order => order.CreationDate);
 
         // Response
-        var mappedOrders = _mapper.Map<List<OrderLookupDto>>(await customerOrders.ToListAsync(cancellationToken));
+        var mappedOrders = _mapper.Map<List<OrderLookupDto>>(customerOrders.ToList());
         return PagedList<OrderLookupDto>.Create(mappedOrders, request.Page);
     }
 }

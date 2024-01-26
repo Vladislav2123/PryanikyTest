@@ -13,6 +13,6 @@ public class ProductLookupDto : IMappping
 
     public void CreateMap(Profile profile)
     {
-        profile.CreateMap<Product, ProductDto>();
+        profile.CreateMap<Product, ProductLookupDto>();
     }
 }

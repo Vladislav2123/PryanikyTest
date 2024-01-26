@@ -53,7 +53,7 @@ public class GetAllProductsHandler
         else products = products.OrderByDescending(sortColumnExpression);
 
         // Response
-        var mappedProducts = _mapper.Map<List<ProductLookupDto>>(await products.ToListAsync(cancellationToken));
+        var mappedProducts = _mapper.Map<List<ProductLookupDto>>(products.ToList());
         return PagedList<ProductLookupDto>.Create(mappedProducts, request.Page);
     }
 

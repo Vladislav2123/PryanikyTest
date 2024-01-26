@@ -3,6 +3,7 @@ using PryanikyTest.Application.Mapping;
 using Microsoft.Extensions.DependencyInjection;
 using MediatR;
 using FluentValidation;
+using MediatR.NotificationPublishers;
 
 namespace PryanikyTest.Application;
 
@@ -18,7 +19,10 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
         services.AddMediatR(cfg =>
-			cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+        {
+			cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            cfg.NotificationPublisher = new ForeachAwaitPublisher();
+        });
         
         // Adding Validation Behavior, for handling all validators from assembly
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

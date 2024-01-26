@@ -1,9 +1,10 @@
 ﻿using PryanikyTest.Domain.Entities;
+using PryanikyTest.Application.Mapping;
 using AutoMapper;
 
 namespace PryanikyTest.Application.Features.Sellers.Dto;
 
-public class SellerDto
+public class SellerDto : IMappping
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

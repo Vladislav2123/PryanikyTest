@@ -44,7 +44,7 @@ public class DeleteOrderHandler : IRequestHandler<DeleteOrderCommand, Unit>
         _dbContext.Orders.Remove(order);
         await _dbContext.SaveChangesAsync(cancellationToken);
         await _publisher.Publish(new ProductOrdersUpdatedEvent(
-            (ICollection<Guid>)order.ProductOrders.Select(order => order.ProductId)));
+            order.ProductOrders.Select(order => order.ProductId).ToList()));
 
         return Unit.Value;        
     }

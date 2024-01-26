@@ -28,7 +28,8 @@ public class GetAllOrdersHandler : IRequestHandler<GetAllOrdersQuery, PagedList<
 
     public async Task<PagedList<OrderLookupDto>> Handle(GetAllOrdersQuery request, CancellationToken cancellationToken)
     {
-        IQueryable<Order> orders = _dbContext.Orders;
+        IQueryable<Order> orders = _dbContext.Orders
+            .Include(order => order.ProductOrders);
 
         var sortColumnExpression = GetSortColumnExpression(request);
         if(request.SortOrder?.ToLower() == "asc") orders = orders.OrderBy(sortColumnExpression);

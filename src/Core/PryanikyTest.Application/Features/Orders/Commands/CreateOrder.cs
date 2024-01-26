@@ -7,6 +7,7 @@ using PryanikyTest.Domain.Entities;
 using FluentValidation;
 using AutoMapper;
 using MediatR;
+using PryanikyTest.Application.Features.Orders.Events;
 
 namespace PryanikyTest.Application.Features.Orders.Commands;
 
@@ -94,7 +95,8 @@ public class CreateOrderHandler : IRequestHandler<CreateOrderCommand, OrderCreat
 
         await _dbContext.Orders.AddAsync(order, cancellationToken);
         await _dbContext.SaveChangesAsync(cancellationToken);
-        await _publisher.Publish(productOrders.Select(order => order.ProductId));
+        await _publisher.Publish(new ProductOrdersUpdatedEvent(
+            productOrders.Select(order => order.ProductId).ToList()));
 
         return _mapper.Map<OrderCreatedDto>(order);
     }

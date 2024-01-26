@@ -21,7 +21,7 @@ public static class DbInitializer
 
 		dbContext.Database.EnsureCreated();
 
-		await SeedDatabaseAsync(dbContext, mediator);
+		// await SeedDatabaseAsync(dbContext, mediator);
 	}
 
 	private static async Task SeedDatabaseAsync(

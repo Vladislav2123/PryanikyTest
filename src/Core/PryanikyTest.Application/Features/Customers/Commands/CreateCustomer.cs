@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using PryanikyTest.Application.Abstractions;
 using PryanikyTest.Application.Features.Customers.Dto;
 using PryanikyTest.Domain.Entities;
@@ -48,7 +49,7 @@ public class CreateCustomerHandler : IRequestHandler<CreateCustomerCommand, Cust
     public async Task<CustomerCreatedDto> Handle(CreateCustomerCommand request, CancellationToken cancellationToken)
     {
         var sameEmailCustomer = await _dbContext.Customers
-            .FindAsync(request.Email, cancellationToken);
+            .FirstOrDefaultAsync(customer => customer.Email == request.Email, cancellationToken);
 
         if(sameEmailCustomer != null) throw new EmailAlreadyInUseException(request.Email, nameof(Customer));
 

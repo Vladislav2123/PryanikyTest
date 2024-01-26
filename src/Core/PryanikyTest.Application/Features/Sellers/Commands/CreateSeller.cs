@@ -5,6 +5,7 @@ using PryanikyTest.Application.Abstractions;
 using AutoMapper;
 using PryanikyTest.Domain.Exceptions;
 using PryanikyTest.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace PryanikyTest.Application.Features.Sellers.Commands;
 
@@ -48,7 +49,7 @@ public class CreateSellerHandler : IRequestHandler<CreateSellerCommand, SellerCr
     public async Task<SellerCreatedDto> Handle(CreateSellerCommand request, CancellationToken cancellationToken)
     {
         var sameEmailSeller = await _dbContext.Sellers
-            .FindAsync(request.Email, cancellationToken);
+            .FirstOrDefaultAsync(seller => seller.Email == request.Email, cancellationToken);
         
         if(sameEmailSeller != null) throw new EmailAlreadyInUseException(request.Email, nameof(Seller));
 

@@ -61,7 +61,7 @@ public class OrderController : ControllerBase
 
     [HttpPut("{orderId}/status")]
     public async Task<ActionResult> UpdateOrderStatus(
-        [FromBody] UpdateOrderStatusCommand command, CancellationToken cancellationToken)
+        [FromForm] UpdateOrderStatusCommand command, CancellationToken cancellationToken)
     {
         await _mediator.Send(command, cancellationToken);
 

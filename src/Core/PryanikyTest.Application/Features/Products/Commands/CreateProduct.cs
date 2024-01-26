@@ -63,10 +63,11 @@ public class CreateProductHandler : IRequestHandler<CreateProductCommand, Produc
         var newProduct = new Product
         {
             Id = Guid.NewGuid(),
+            SellerId = request.SellerId,
             Name = request.Name,
             Description = request.Description,
+            Price = request.Price,
             CreationDate = DateTime.UtcNow,
-            SellerId = request.SellerId,
         };
 
         await _dbContext.Products.AddAsync(newProduct, cancellationToken);

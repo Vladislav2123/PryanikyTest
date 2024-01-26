@@ -4,6 +4,7 @@ using PryanikyTest.Domain.Entities;
 using PryanikyTest.Domain.Exceptions;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace PryanikyTest.Application.Features.Orders.Queries;
 
@@ -23,7 +24,8 @@ public class GetOrderByIdHandler : IRequestHandler<GetOrderByIdQuery, OrderDto>
     public async Task<OrderDto> Handle(GetOrderByIdQuery request, CancellationToken cancellationToken)
     {
         var order = await _dbContext.Orders
-            .FindAsync(request.OrderId, cancellationToken);
+            .Include(order => order.ProductOrders)
+            .FirstOrDefaultAsync(order => order.Id == request.OrderId, cancellationToken);
 
         if (order == null) throw new EntityNotFoundException(nameof(Order), request.OrderId);
 

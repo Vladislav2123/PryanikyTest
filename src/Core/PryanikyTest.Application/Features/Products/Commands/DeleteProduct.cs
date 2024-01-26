@@ -1,8 +1,9 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using Microsoft.EntityFrameworkCore;
 using PryanikyTest.Application.Abstractions;
 using PryanikyTest.Application.Validation;
 using PryanikyTest.Domain.Exceptions;
+using FluentValidation;
+using MediatR;
 
 namespace PryanikyTest.Application.Features.Products.Commands;
 
@@ -29,9 +30,22 @@ public class DeleteProductHandler : IRequestHandler<DeleteProductCommand, Unit>
     public async Task<Unit> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
     {
         var product = await _dbContext.Products
-            .FindAsync(request.ProductId, cancellationToken);
+            .Include(product => product.ProductOrders)
+            .FirstOrDefaultAsync(product => product.Id == request.ProductId, cancellationToken);
 
         if(product == null) throw new EntityNotFoundException(nameof(product), request.ProductId);
+
+        // Deleting product orders of product
+        foreach(var productOrder in product.ProductOrders)
+        {
+            var order = await _dbContext.Orders
+                .Include(order => order.ProductOrders)
+                .FirstOrDefaultAsync(order => order.Id == productOrder.OrderId, cancellationToken);
+
+            _dbContext.ProductOrders.Remove(productOrder);
+
+            if(order.ProductOrders.Count == 1) _dbContext.Orders.Remove(order);
+        }
 
         _dbContext.Products.Remove(product);
         await _dbContext.SaveChangesAsync(cancellationToken);

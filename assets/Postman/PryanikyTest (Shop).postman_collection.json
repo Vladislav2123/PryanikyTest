@@ -1,0 +1,623 @@
+{
+	"info": {
+		"_postman_id": "8392908e-cf9a-420a-9f24-d924cecfcd8c",
+		"name": "PryanikyTest (Shop)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28536806"
+	},
+	"item": [
+		{
+			"name": "Create Seller",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(responseBody && responseCode.code >= 200 && responseCode.code < 300) {\r",
+							"    var json = pm.response.json();\r",
+							"    pm.environment.set(\"sellerId\", json.id);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Pryaniky",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "pryaniky@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Pryaniky123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/sellers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sellers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Sellers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/sellers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sellers"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": "Pryaniky",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "pageSize",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Seller By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/sellers/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sellers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{sellerId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Product",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(responseBody && responseCode.code >= 200 && responseCode.code < 300) {\r",
+							"    var json = pm.response.json();\r",
+							"    pm.environment.set(\"productId\", json.id);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "sellerId",
+							"value": "{{sellerId}}",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Keyboard",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Good Product!",
+							"description": "optional",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "35",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/products",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "search",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "sellerId",
+							"value": "{{sellerId}}",
+							"disabled": true
+						},
+						{
+							"key": "sortColumn",
+							"value": "orders",
+							"disabled": true
+						},
+						{
+							"key": "sortOrder",
+							"value": "desc",
+							"disabled": true
+						},
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "pageSize",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/products/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{productId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Customer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(responseBody && responseCode.code >= 200 && responseCode.code < 300) {\r",
+							"    var json = pm.response.json();\r",
+							"    pm.environment.set(\"customerId\", json.id);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Good Customer",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "customer@gmal.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Customer123",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/customers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Customers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/customers",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "pageSize",
+							"value": "10",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Customer By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/customers/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{customerId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if(responseBody && responseCode.code >= 200 && responseCode.code < 300) {\r",
+							"    var json = pm.response.json();\r",
+							"    pm.environment.set(\"orderId\", json.id);\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productOrders\": [\r\n    {\r\n      \"productId\": \"{{productId}}\",\r\n      \"amount\": 1\r\n    }\r\n  ],\r\n  \"customerId\": \"{{customerId}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/orders?sortColumn=products&sortOrder=desc&page=1&pageSize=10",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders"
+					],
+					"query": [
+						{
+							"key": "sortColumn",
+							"value": "products"
+						},
+						{
+							"key": "sortOrder",
+							"value": "desc"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Orders By Customer Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/customers/:id/orders?page=1&pageSize=10",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						":id",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{customerId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/orders/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{orderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Order Status",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "orderId",
+							"value": "{{orderId}}",
+							"type": "text"
+						},
+						{
+							"key": "completed",
+							"value": "true",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/orders/:id/status",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						":id",
+						"status"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{orderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Order",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/orders/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"orders",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{orderId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/products/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"products",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{productId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Customer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/customers/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"customers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{customerId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Seller",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/sellers/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"sellers",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{{sellerId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

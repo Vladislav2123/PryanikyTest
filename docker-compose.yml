@@ -14,7 +14,7 @@ services:
       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets
       - ${USERPROFILE}\.aspnet\https:/root/.aspnet/https/
     networks:
-      - pryaniky_net
+      - pryaniky_test_net
     restart: always
     depends_on:
       db:
